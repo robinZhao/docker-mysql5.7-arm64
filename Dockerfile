@@ -6,7 +6,7 @@
 
 FROM m.daocloud.io/docker.io/library/ubuntu:18.04
 ARG HTTPS_PROXY=""
-RUN export HTTP_PROXY=$HTTPS_PROXY
+RUN export HTTPS_PROXY=$HTTPS_PROXY
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r mysql && useradd -r -g mysql mysql
 
@@ -66,7 +66,7 @@ RUN set -eux; \
 ENV MYSQL_MAJOR 5.7
 ENV MYSQL_VERSION 5.7.42-0ubuntu0.18.04.1
 RUN apt-get update
-RUN apt-get install -y tzdata
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
 ENV TZ=Asia/Shanghai
 RUN ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
 RUN apt-get install -y mysql-server
