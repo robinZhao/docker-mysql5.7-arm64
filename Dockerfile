@@ -6,7 +6,7 @@
 
 FROM m.daocloud.io/docker.io/library/ubuntu:18.04
 ARG HTTPS_PROXY=""
-ENV HTTP_PROXY $HTTPS_PROXY
+RUN export HTTP_PROXY=$HTTPS_PROXY
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r mysql && useradd -r -g mysql mysql
 
